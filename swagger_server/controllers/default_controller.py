@@ -35,7 +35,7 @@ def delete_student(student_id: Optional[int]=None):  # noqa: E501
     :rtype: Student
     """
     try:
-        if not student_id:
+        if student_id is None:
             return 'invalid input', 400
 
         return delete(student_id)
@@ -54,7 +54,7 @@ def get_student_by_id(student_id: Optional[int]=None):  # noqa: E501
     :rtype: Student
     """
     try:
-        if not student_id:
+        if student_id is None:
             return 'invalid input', 400
 
         return get_by_id(student_id)
