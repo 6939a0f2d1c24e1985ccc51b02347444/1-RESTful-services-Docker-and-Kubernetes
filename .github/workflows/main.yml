@@ -2,7 +2,7 @@ name: Build Test and push
 on: [push, workflow_dispatch]
 env:
   IMAGE_NAME: student_service
-  REPO_NAME: 1-RESTful-services-Docker-and-Kubernetes
+  REPO_NAME: tijnvdk
 
 jobs:
   build:
