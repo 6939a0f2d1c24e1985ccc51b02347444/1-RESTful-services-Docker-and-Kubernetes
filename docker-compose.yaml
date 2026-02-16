@@ -1,6 +1,7 @@
 version: "3"
 services:
   student_service:
+    # build: . # Enable this instead of `image` to run locally.
     image: nginx
     restart: unless-stopped
     depends_on:

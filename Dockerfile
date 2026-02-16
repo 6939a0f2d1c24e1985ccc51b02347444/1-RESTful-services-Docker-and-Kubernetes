@@ -1,5 +1,7 @@
 FROM python:3.13-alpine
 
+ENV PYTHONUNBUFFERED=1
+
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 

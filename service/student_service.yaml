@@ -40,7 +40,7 @@ spec:
               value: mongodb://mongo:27017
           image: student-service:latest
           name: service
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           resources: {}

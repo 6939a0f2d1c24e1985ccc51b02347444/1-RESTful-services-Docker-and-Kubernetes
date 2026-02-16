@@ -3,7 +3,9 @@ from typing import Optional
 import connexion
 
 from swagger_server.models.student import Student
-from swagger_server.service.student_service import add, delete, get_by_id
+from swagger_server.service.student_service import (add, delete,
+                                                    get_average_grade,
+                                                    get_by_id)
 
 
 def add_student(body: Optional[Student]=None):  # noqa: E501
@@ -58,5 +60,23 @@ def get_student_by_id(student_id: Optional[int]=None):  # noqa: E501
             return 'invalid input', 400
 
         return get_by_id(student_id)
+    except ValueError as e:
+        return str(e), 400
+
+def get_average_grade_student(student_id: Optional[int]=None):
+    """gets average grade for student
+
+    Returns the average grade for a single student
+
+    :param student_id: the integer
+    :type student_id: Optional[int]
+
+    :rtype: float
+    """
+    try:
+        if student_id is None:
+            return 'invalid input', 400
+
+        return get_average_grade(student_id)
     except ValueError as e:
         return str(e), 400
