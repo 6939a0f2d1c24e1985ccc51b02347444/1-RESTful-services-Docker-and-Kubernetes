@@ -11,6 +11,15 @@ def add(student: Student):
     if not student:
         return 'invalid input', 400
 
+    # Check if the student already exists based on first and last name
+    existing_student = client.students_db.students.find_one({
+        'first_name': student.first_name,
+        'last_name': student.last_name
+    })
+
+    if existing_student:
+        return 'student already exists', 409
+
     # MongoDB makes use of strings as default. The specification wants to use
     # integers, so we need to generate our own IDs.
     # For ID generation, the user provided ID is always ignored, and a new ID

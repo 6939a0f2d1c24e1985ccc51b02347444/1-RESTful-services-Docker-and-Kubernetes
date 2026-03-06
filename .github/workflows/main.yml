@@ -9,13 +9,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Build docker
         run: |
           docker build . -t $REPO_NAME/$IMAGE_NAME
+
+      - name: Start MongoDB
+        run: |
+          docker network create student_service_network
+          docker run -d --name mongo --network student_service_network -p 27017:27017 mongo:4
+
       - name: run docker
         run: |
-          docker run -d -p 8080:8080 $REPO_NAME/$IMAGE_NAME:latest && \
-            docker ps && sleep 5
+          docker run -d --name student_service --network student_service_network
+            -e MONGO_URI=mongodb://mongo:27017
+            -p 8080:8080
+            $REPO_NAME/$IMAGE_NAME
+          sleep 10 # Wait for the service to start
 
       - name: "Check files existence"
         uses: andstor/file-existence-action@v2
