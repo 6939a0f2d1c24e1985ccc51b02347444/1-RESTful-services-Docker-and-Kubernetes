@@ -21,9 +21,9 @@ jobs:
 
       - name: run docker
         run: |
-          docker run -d --name student_service --network student_service_network
-            -e MONGO_URI=mongodb://mongo:27017
-            -p 8080:8080
+          docker run -d --name student_service --network student_service_network \
+            -e MONGO_URI=mongodb://mongo:27017 \
+            -p 8080:8080 \
             $REPO_NAME/$IMAGE_NAME
           sleep 10 # Wait for the service to start
 
